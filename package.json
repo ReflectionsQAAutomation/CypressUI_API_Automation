@@ -3,13 +3,38 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "UI:E2E:test": "cypress run --headed --spec 'cypress/e2e/UI/**/product-purchase.cy.js' --browser chrome --record --key 13b89e1a-0c85-4a6a-8392-ad72183afd56",
+    "merge:json:report": "npx mochawesome-merge cypress/results/json/mochawesome*.json > cypress/results/json/output.json",
+    "generate:html:report": "npx marge cypress/results/json/output.json --reportDir ./cypress/results/html-report --reportFilename index.html",
+    "build:html:report": "npm-run-all merge:json:report generate:html:report && rimraf cypress/results/json",
+    "uploadReport": "node ./cypress/utils/uploadReport.js && rimraf cypress/results/junit-combined/combined-report.xml",
+    "merge:reports": "jrm ./cypress/results/junit-combined/combined-report.xml \"./cypress/results/junit/*.xml\" && rimraf cypress/results/junit",
+    "UI:E2E:test:merge:upload": "cross-env UPLOAD_REPORT_CONFIG=e2e.ui npm-run-all UI:E2E:test --continue-on-error merge:reports build:html:report uploadReport"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cypress": "^13.7.0"
+    "cypress": "^13.7.0",
+    "junit-report-merger": "^5.0.0",
+    "axe-core": "^4.7.0",
+    "axios": "^1.3.4",
+    "cross-env": "^7.0.3",
+    "cypress-downloadfile": "^1.2.3",
+    "cypress-multi-reporters": "^1.6.3",
+    "dotenv": "^16.0.3",
+    "jimp": "^0.22.10",
+    "lambdatest-cypress-cli": "^3.0.12",
+    "marge": "^1.0.1",
+    "mocha": "^10.2.0",
+    "mocha-junit-reporter": "^2.2.0",
+    "mochawesome-merge": "^4.3.0",
+    "npm-run-all": "^4.1.5",
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^7.0.0",
+    "rimraf": "^4.4.0"
+
   }
 }

@@ -1,7 +1,8 @@
 const { defineConfig } = require("cypress");
-
+const { downloadFile } = require("cypress-downloadfile/lib/addPlugin");
 module.exports = defineConfig({
   e2e: {
+    projectId: "sbywkh",
     reporter: "cypress-multi-reporters",
     reporterOptions: {
       configFile: "reporter-config.json",
@@ -10,7 +11,9 @@ module.exports = defineConfig({
 
     specPattern: ["cypress/Component/**/**/*.js", "cypress/e2e/**/**/*.js"],
     setupNodeEvents(on, config) {
-     // set up the events
+      on("task", {
+        downloadFile,
+      });
     },
     hideXHRInCommandLog: true,
     video: true,
