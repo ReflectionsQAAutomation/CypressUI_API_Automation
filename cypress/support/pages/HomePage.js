@@ -6,7 +6,7 @@ class HomePage{
         item : () => cy.get('.card-img-top'),
         addToCartButton : () => cy.get('[ data-test=add-to-cart]'),
         cartButton : () =>  cy.get('[ data-test=nav-cart]'),
-        homeButton : () => cy.get('[ data-test=nav-home]')
+        homeButton : () => cy.get('[ data-test=nav-home]'),
     }
 
     searchItem(item){
@@ -15,6 +15,11 @@ class HomePage{
 
     clickSearchButton(){
         this.elements.searchButton().click()
+    }
+
+    searchProduct(item){
+        this.searchItem(item)
+        this.clickSearchButton()
     }
 
     clickItem(){
