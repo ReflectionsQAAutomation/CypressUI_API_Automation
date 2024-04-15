@@ -3,13 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:demo": "cypress open --config-file demo.config.js",
+    "cy:stage": "cypress open --config-file stage.config.js",
+    "jenkins:demo": "npx cypress run --spec cypress/e2e/UI/* --config-file demo.config.js",
+    "jenkins:stage": "npx cypress run --spec cypress/e2e/UI/* --config-file stage.config.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cypress": "^13.7.0"
+    "neat-csv": "^5.2.0"
+  },
+  "devDependencies": {
+    "cypress": "^13.7.3",
+    "cypress-failed-log": "^2.10.0"
   }
 }
