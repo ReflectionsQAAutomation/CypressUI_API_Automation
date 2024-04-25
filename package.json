@@ -13,7 +13,17 @@
     "uploadReport": "node ./cypress/utils/uploadReport.js",
     "posttest": "merge:reports",
     "UI:E2E:test:merge:upload": "npm run pretest && cross-env UPLOAD_REPORT_CONFIG=e2e.ui npm-run-all UI:E2E:test ",
-    "API:test:merge:upload": "npm run pretest && cross-env UPLOAD_REPORT_CONFIG=component.api npm-run-all API:Component:test --continue-on-error merge:reports uploadReport"
+    "API:test:merge:upload": "npm run pretest && cross-env UPLOAD_REPORT_CONFIG=component.api npm-run-all API:Component:test --continue-on-error merge:reports uploadReport",
+    "merge:json:report": "npx mochawesome-merge cypress/results/json/mochawesome*.json > cypress/results/json/output.json",
+    "generate:html:report": "npx marge cypress/results/json/output.json --reportDir ./cypress/results/html-report --reportFilename index.html",
+    "build:html:report": "npm-run-all merge:json:report generate:html:report && rimraf cypress/results/json",
+    "uploadReport": "node ./cypress/utils/uploadReport.js && rimraf cypress/results/junit-combined/combined-report.xml",
+    "merge:reports": "jrm ./cypress/results/junit-combined/combined-report.xml \"./cypress/results/junit/*.xml\" && rimraf cypress/results/junit",
+    "UI:E2E:test:merge:upload": "cross-env UPLOAD_REPORT_CONFIG=e2e.ui npm-run-all UI:E2E:test --continue-on-error merge:reports build:html:report uploadReport",
+    "cy:demo": "cypress open --config-file demo.config.js",
+    "cy:stage": "cypress open --config-file stage.config.js",
+    "jenkins:demo": "npx cypress run --spec cypress/e2e/UI/* --config-file demo.config.js",
+    "jenkins:stage": "npx cypress run --spec cypress/e2e/UI/* --config-file stage.config.js"
   },
   "keywords": [],
   "author": "",
@@ -38,6 +48,11 @@
     "npm-run-all": "^4.1.5",
     "pixelmatch": "^5.3.0",
     "pngjs": "^7.0.0",
-    "rimraf": "^4.4.0"
+    "rimraf": "^4.4.0",
+    "neat-csv": "^5.2.0"
+  },
+  "devDependencies": {
+    "cypress": "^13.7.3",
+    "cypress-failed-log": "^2.10.0"
   }
 }
