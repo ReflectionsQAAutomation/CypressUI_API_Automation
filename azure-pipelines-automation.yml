@@ -1,0 +1,70 @@
+trigger:
+  batch: true
+
+schedules:
+  - cron: "0 0 * * *"
+    displayName: "Run Cypress tests at 12 AM every day"
+    branches:
+      include:
+        - feature/cypress-demo
+
+pool:
+  vmImage: "ubuntu-latest"
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "14.x"
+    displayName: "Install Node.js"
+
+  - script: |
+      npm install
+    displayName: "Install dependencies"
+    workingDirectory: "./automation"
+
+  - script: |
+      export API_Token=$(APIToken)
+      export ACCOUNT_ID=$(accountId)
+      npm run API:E2E:test:merge:upload
+    displayName: "Run API E2E Tests"
+    workingDirectory: "./automation"
+    env:
+      API_Token: $(APIToken)
+      ACCOUNT_ID: $(accountID)
+    continueOnError: true
+
+  - script: |
+      ls -a
+      export API_Token=$(APIToken)
+      export ACCOUNT_ID=$(accountId)
+      npm run UI:E2E:test:merge:upload
+    displayName: "Run UI E2E Tests"
+    workingDirectory: "./automation"
+    env:
+      API_Token: $(APIToken)
+      ACCOUNT_ID: $(accountID)
+      continueOnError: true
+  - task: PublishPipelineArtifact@0
+    displayName: 'Publish Screenshots (Cypress)'
+    condition: failed()
+    inputs:
+        artifactName: 'screenshots'
+        targetPath: '$(Build.SourcesDirectory)/automation/cypress/screenshots'
+  - task: PublishPipelineArtifact@0
+    displayName: 'Publish Videos (Cypress)'
+    condition: failed()
+    inputs:
+        artifactName: 'videos'
+        targetPath: '$(Build.SourcesDirectory)/automation/cypress/videos'
+  - task: PublishPipelineArtifact@0
+    displayName: 'Publish Final Image'
+    condition: failed()
+    inputs:
+        artifactName: 'videos'
+        targetPath: '$(Build.SourcesDirectory)/automation/cypress/fixtures/ComparisonImages'
+  - task: PublishPipelineArtifact@0
+    displayName: 'Publish Baseline Image'
+    condition: failed()
+    inputs:
+        artifactName: 'videos'
+        targetPath: '$(Build.SourcesDirectory)/automation/cypress/fixtures/BaselineImages'

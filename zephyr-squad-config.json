@@ -1,0 +1,32 @@
+{
+  "projectKey": "TES",
+  "username": "Roshni George",
+  "e2e": {
+    "api": {
+      "cycleName": "Regression",
+      "versionName": "Unscheduled",
+      "jobName": "API_Regression_On_Unscheduled",
+      "folderName": "API"
+    },
+    "ui": {
+      "cycleName": "Regression",
+      "versionName": "Unscheduled",
+      "jobName": "UI_E2E_Regression_On_Regression",
+      "folderName": "WebUI"
+    }
+  },
+  "component": {
+    "api": {
+      "cycleName": "Regression",
+      "versionName": "Unscheduled",
+      "jobName": "API_Regression_On_Unscheduled",
+      "folderName": "API"
+    },
+    "ui": {
+      "cycleName": "Regression",
+      "versionName": "Unscheduled",
+      "jobName": "UI_E2E_Regression_On_Unscheduled",
+      "folderName": "WebUI"
+    }
+  }
+}

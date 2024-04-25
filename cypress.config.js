@@ -3,7 +3,7 @@ const { downloadFile } = require("cypress-downloadfile/lib/addPlugin");
 module.exports = defineConfig({
   e2e: {
     projectId: "sbywkh",
-    reporter: "cypress-multi-reporters",
+    "reporter": "cypress-multi-reporters",
     reporterOptions: {
       configFile: "reporter-config.json",
     },

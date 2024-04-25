@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<testsuites failures="0" errors="0" tests="9" skipped="0">
+  <testsuite name="Root Suite" timestamp="2024-04-22T10:16:15" tests="0" file="cypress\Component\api_tests\cart\delete-items.js" time="0.000" failures="0"/>
+  <testsuite name="cart tests -delete" timestamp="2024-04-22T10:16:15" tests="5" time="9.491" failures="0">
+    <testcase name="cart tests -delete create a new cart" time="0.652" classname="create a new cart"/>
+    <testcase name="cart tests -delete Retrieves a product" time="5.628" classname="Retrieves a product"/>
+    <testcase name="cart tests -delete get cart id after adding multiple products" time="0.686" classname="get cart id after adding multiple products"/>
+    <testcase name="cart tests -delete Delete an item in cart" time="0.690" classname="Delete an item in cart"/>
+    <testcase name="cart tests -delete get cart id after delete" time="0.713" classname="get cart id after delete"/>
+  </testsuite>
+  <testsuite name="Root Suite" timestamp="2024-04-22T10:15:50" tests="0" file="cypress\Component\api_tests\cart\add-items-to-cart.js" time="0.000" failures="0"/>
+  <testsuite name="cart tests -add" timestamp="2024-04-22T10:15:50" tests="4" time="9.021" failures="0">
+    <testcase name="cart tests -add create a new cart" time="1.473" classname="create a new cart"/>
+    <testcase name="cart tests -add Retrieves a product" time="5.077" classname="Retrieves a product"/>
+    <testcase name="cart tests -add Add item to a cart" time="0.657" classname="Add item to a cart"/>
+    <testcase name="cart tests -add get cart id" time="0.688" classname="get cart id"/>
+  </testsuite>
+</testsuites>

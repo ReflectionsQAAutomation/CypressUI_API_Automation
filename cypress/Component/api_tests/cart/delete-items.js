@@ -12,7 +12,7 @@ describe('cart tests -delete', () => {
 
         cy.request({
             method: "POST",
-            url: "/carts",
+            url: "https://api.practicesoftwaretesting.com/carts",
             headers: {
                 "accept": "application/json"
             }
@@ -30,7 +30,7 @@ describe('cart tests -delete', () => {
 
         cy.request({
             method: "GET",
-            url: "/products?between=10",
+            url: "https://api.practicesoftwaretesting.com/products?between=10",
             headers: {
                 "accept": "application/json"
             }
@@ -55,7 +55,7 @@ describe('cart tests -delete', () => {
 
                     cy.request({
                         method: "POST",
-                        url: "carts/" + cart_id,
+                        url: "https://api.practicesoftwaretesting.com/carts/" + cart_id,
                         headers: {
                             "accept": "application/json",
                             "Content-Type": "application/json"
@@ -84,7 +84,7 @@ describe('cart tests -delete', () => {
 
         cy.request({
             method: "GET",
-            url: "/carts/" + cart_id,
+            url: "https://api.practicesoftwaretesting.com/carts/" + cart_id,
             headers: {
                 "accept": "application/json"
             }
@@ -121,7 +121,7 @@ describe('cart tests -delete', () => {
 
         cy.request({
             method: "DELETE",
-            url: "/carts/" + cart_id + "/product/" + productId,
+            url: "https://api.practicesoftwaretesting.com/carts/" + cart_id + "/product/" + productId,
 
         }).as("deleteItem");
 
@@ -135,7 +135,7 @@ describe('cart tests -delete', () => {
 
         cy.request({
             method: "GET",
-            url: "/carts/" + cart_id,
+            url: "https://api.practicesoftwaretesting.com/carts/" + cart_id,
             headers: {
                 "accept": "application/json"
             }

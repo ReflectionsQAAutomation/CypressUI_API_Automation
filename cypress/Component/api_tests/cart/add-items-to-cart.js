@@ -15,7 +15,7 @@ describe('cart tests -add', () => {
 
     cy.request({
       method: "POST",
-      url: "/carts",
+      url: "https://api.practicesoftwaretesting.com/carts",
       headers: {
         "accept": "application/json"
       }
@@ -33,7 +33,7 @@ describe('cart tests -add', () => {
 
     cy.request({
       method: "GET",
-      url: "/products?between=10",
+      url: "https://api.practicesoftwaretesting.com/products?between=10",
       headers: {
         "accept": "application/json"
       }
@@ -59,7 +59,7 @@ describe('cart tests -add', () => {
     postData.product_id = product_id;
     cy.request({
       method: "POST",
-      url: "carts/" + cart_id,
+      url: "https://api.practicesoftwaretesting.com/carts/" + cart_id,
       headers: {
         "accept": "application/json",
         "Content-Type": "application/json"
@@ -80,7 +80,7 @@ describe('cart tests -add', () => {
   it("get cart id", function () {
     cy.request({
       method: "GET",
-      url: "/carts/" + cart_id,
+      url: "https://api.practicesoftwaretesting.com/carts/" + cart_id,
       headers: {
         "accept": "application/json"
       }
@@ -98,11 +98,6 @@ describe('cart tests -add', () => {
     });
 
   });
-
-
-  
-
-
 
 
 });
