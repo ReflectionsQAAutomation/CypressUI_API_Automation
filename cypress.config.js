@@ -8,8 +8,8 @@ module.exports = defineConfig({
       configFile: "reporter-config.json",
     },
     experimentalStudio: false,
-
     specPattern: ["cypress/Component/**/**/*.js", "cypress/e2e/**/**/*.js"],
+    baseUrl : "https://practicesoftwaretesting.com",
     setupNodeEvents(on, config) {
       on("task", {
         downloadFile,
@@ -19,4 +19,7 @@ module.exports = defineConfig({
     video: true,
     videoCompression: false,
   },
+  env : {
+    apiUrl : "https://api.practicesoftwaretesting.com"
+  }
 });
