@@ -5,7 +5,7 @@ import CheckoutPage from '../../support/pages/CheckoutPage';
 const csv = require('neat-csv')
 
 const homePage = new HomePage();
-const checkoutPage = new CheckoutPage();
+const checkoutPage = new CheckoutPage();  
 
 let regData;
 
@@ -19,8 +19,6 @@ const paymentMethod = [
 
 describe('product purchase', () => {
   before(() => {
-    cy.intercept('POST', 'https://api.practicesoftwaretesting.com/users/login').as('login')
-    cy.intercept('GET', 'https://api.practicesoftwaretesting.com/products/search?*').as('search')
     cy.fixture("products.csv")
       .then(csv)
       .then((data) => {
@@ -29,11 +27,13 @@ describe('product purchase', () => {
   })
 
   beforeEach(() => {
-    cy.visit('https://practicesoftwaretesting.com')
+    cy.visit('/')
+    cy.intercept('POST', `${Cypress.env('apiUrl')}/users/login`).as('login')
+    cy.intercept('GET', `${Cypress.env('apiUrl')}/products/search?*`).as('search')
   })
 
 
-  it('Product Puchase using Cash On Delievery - Happy Path', () => {
+  it('Product Puchase - Happy Path', () => {
     for (let i = 0; i < regData.length; i++) {
       homePage.searchProduct(regData[i]['Products'])
       cy.wait('@search')
