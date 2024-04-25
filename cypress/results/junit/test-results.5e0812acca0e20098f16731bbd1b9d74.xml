@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="9.504" tests="5" failures="0">
+  <testsuite name="Root Suite" timestamp="2024-04-22T10:16:15" tests="0" file="cypress\Component\api_tests\cart\delete-items.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="cart tests -delete" timestamp="2024-04-22T10:16:15" tests="5" time="9.491" failures="0">
+    <testcase name="cart tests -delete create a new cart" time="0.652" classname="create a new cart">
+    </testcase>
+    <testcase name="cart tests -delete Retrieves a product" time="5.628" classname="Retrieves a product">
+    </testcase>
+    <testcase name="cart tests -delete get cart id after adding multiple products" time="0.686" classname="get cart id after adding multiple products">
+    </testcase>
+    <testcase name="cart tests -delete Delete an item in cart" time="0.690" classname="Delete an item in cart">
+    </testcase>
+    <testcase name="cart tests -delete get cart id after delete" time="0.713" classname="get cart id after delete">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -19,8 +19,6 @@ const paymentMethod = [
 
 describe('product purchase', () => {
   before(() => {
-    cy.intercept('POST', 'https://api.practicesoftwaretesting.com/users/login').as('login')
-    cy.intercept('GET', 'https://api.practicesoftwaretesting.com/products/search?*').as('search')
     cy.fixture("products.csv")
       .then(csv)
       .then((data) => {
@@ -30,6 +28,8 @@ describe('product purchase', () => {
 
   beforeEach(() => {
     cy.visit('https://practicesoftwaretesting.com')
+    cy.intercept('POST', 'https://api.practicesoftwaretesting.com/users/login').as('login')
+    cy.intercept('GET', 'https://api.practicesoftwaretesting.com/products/search?*').as('search')
   })
 
 
