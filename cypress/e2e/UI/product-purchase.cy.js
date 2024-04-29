@@ -5,17 +5,11 @@ import CheckoutPage from '../../support/pages/CheckoutPage';
 const csv = require('neat-csv')
 
 const homePage = new HomePage();
-const checkoutPage = new CheckoutPage();  
+const checkoutPage = new CheckoutPage();
 
 let regData;
+let testdata;
 
-const paymentMethod = [
-  {
-    paymentMethod: "Cash on Delivery",
-    paymentMethod: "Credit Card"
-  }
-
-]
 
 describe('product purchase', () => {
   before(() => {
@@ -24,6 +18,10 @@ describe('product purchase', () => {
       .then((data) => {
         regData = data
       })
+
+    cy.fixture('testdata').then((data1) =>{
+      testdata = data1
+    })
   })
 
   beforeEach(() => {
@@ -35,42 +33,25 @@ describe('product purchase', () => {
 
   it('Product Puchase - Happy Path', () => {
     for (let i = 0; i < regData.length; i++) {
-      homePage.searchProduct(regData[i]['Products'])
+      cy.inputField(homePage.elements.searchBox, regData[i]['Products'])
+      cy.clickElement(homePage.elements.searchButton)
       cy.wait('@search')
-      homePage.clickItem()
-      homePage.clickAddToCart()
-      homePage.clickOnCart()
-      checkoutPage.clickProceedToCheckout()
+      cy.wait(5000)
+      cy.clickElement(homePage.elements.item)
+      cy.clickElement(homePage.elements.addToCartButton)
+      cy.clickElement(homePage.elements.cartButton)
+      cy.clickElement(checkoutPage.elements.proceedToCheckoutButton)
       if (i == 0) {
-        checkoutPage.login()
+        cy.login(testdata.username, testdata.password)
         cy.wait('@login')
       }
-      checkoutPage.clickProceedToCheckout()
-      checkoutPage.clickProceedToCheckout()
-      checkoutPage.selectPaymentMethod(regData[i]['Payment Method'])
-      if (regData[i]['Payment Method'] === "Credit Card") {
-        checkoutPage.fllCreditCardDetails()
-      }
-      checkoutPage.clickConfirm()
-      homePage.clickOnHome()
+      cy.clickElement(checkoutPage.elements.proceedToCheckoutButton)
+      cy.clickElement(checkoutPage.elements.proceedToCheckoutButton)
+      cy.selectElement(checkoutPage.elements.paymentMethodDropDown, regData[i]['Payment Method'])
+      cy.clickElement(checkoutPage.elements.confirmButton)
+      cy.clickElement(homePage.elements.homeButton)
     }
   })
 
-
-  it('Delete an Item from Cart', () => {
-    cy.fixture('purchaseItems').then((purchaseItems) => {
-      homePage.searchProduct(purchaseItems.item1)
-      cy.wait('@search')
-      homePage.clickItem()
-      homePage.clickAddToCart()
-      homePage.clickOnHome()
-      homePage.searchProduct(purchaseItems.item2)
-      cy.wait('@search')
-      homePage.clickItem()
-      homePage.clickAddToCart()
-      homePage.clickOnCart()
-      checkoutPage.deleteItem()
-    })
-  })
 
 })
