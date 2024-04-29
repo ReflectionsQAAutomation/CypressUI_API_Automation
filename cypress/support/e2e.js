@@ -15,6 +15,10 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import '../utils/UI/clickElement.js'
+import '../utils/UI/inputField.js'
+import '../utils/UI/login.js'
+import '../utils/UI/selectElement.js'
 
 require('cypress-failed-log')
 
