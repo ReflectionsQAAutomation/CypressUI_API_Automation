@@ -27,3 +27,7 @@
 import axios from "axios";
 
 import "cypress-downloadfile/lib/downloadFileCommand";
+
+import '../utils/API/postAPI.js'
+import '../utils/API/getAPI.js'
+import '../utils/API/deleteAPI.js'
