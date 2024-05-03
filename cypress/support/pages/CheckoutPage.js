@@ -1,3 +1,6 @@
+import HomePage from '../../support/pages/HomePage';
+const homePage = new HomePage();
+
 class CheckoutPage{
 
     elements = {
@@ -19,7 +22,21 @@ class CheckoutPage{
         paymentSuccessMessage : '.help-block',
         deleteButton : '.fa.fa-remove'
 
-    }    
+    }  
+
+    checkoutCart(PaymentMethod){
+        cy.clickElement(homePage.elements.cartButton)
+        cy.clickElement(this.elements.proceedToCheckoutButton)
+        cy.clickElement(this.elements.proceedToCheckoutButton)
+        cy.clickElement(this.elements.proceedToCheckoutButton)
+        cy.selectElement(this.elements.paymentMethodDropDown, PaymentMethod)
+        cy.clickElement(this.elements.confirmButton)
+    }  
+
+    deleteProduct(){
+        cy.clickElement(this.elements.deleteButton)
+    }
+
 
 }
 

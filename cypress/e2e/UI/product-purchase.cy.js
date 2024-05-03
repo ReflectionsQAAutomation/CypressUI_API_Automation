@@ -26,31 +26,37 @@ describe('product purchase', () => {
 
   beforeEach(() => {
     cy.visit('/')
+    cy.login(testdata.username, testdata.password)
     cy.intercept('POST', `${Cypress.env('apiUrl')}/users/login`).as('login')
+    cy.wait('@login')    
     cy.intercept('GET', `${Cypress.env('apiUrl')}/products/search?*`).as('search')
   })
 
 
   it('Product Puchase - Happy Path', () => {
     for (let i = 0; i < regData.length; i++) {
-      cy.inputField(homePage.elements.searchBox, regData[i]['Products'])
-      cy.clickElement(homePage.elements.searchButton)
-      cy.wait('@search')
-      cy.wait(5000)
-      cy.clickElement(homePage.elements.item)
-      cy.clickElement(homePage.elements.addToCartButton)
-      cy.clickElement(homePage.elements.cartButton)
-      cy.clickElement(checkoutPage.elements.proceedToCheckoutButton)
-      if (i == 0) {
-        cy.login(testdata.username, testdata.password)
-        cy.wait('@login')
-      }
-      cy.clickElement(checkoutPage.elements.proceedToCheckoutButton)
-      cy.clickElement(checkoutPage.elements.proceedToCheckoutButton)
-      cy.selectElement(checkoutPage.elements.paymentMethodDropDown, regData[i]['Payment Method'])
-      cy.clickElement(checkoutPage.elements.confirmButton)
-      cy.clickElement(homePage.elements.homeButton)
+      homePage.goToHomePage()
+      homePage.searchProduct(regData[i]['Products'])
+      cy.wait('@search')      
+      homePage.addItemToCart()
+      checkoutPage.checkoutCart(regData[i]['Payment Method'])
+      homePage.goToHomePage()
     }
+  })
+
+  it('Delete Product from Cart', () => {
+    cy.fixture('purchaseItems').then((purchaseItems) => {
+      homePage.goToHomePage()
+      homePage.searchProduct(purchaseItems.item1)
+      cy.wait('@search')
+      homePage.addItemToCart()
+      homePage.goToHomePage()
+      homePage.searchProduct(purchaseItems.item2)
+      cy.wait('@search')
+      homePage.addItemToCart()
+      homePage.goToCart()
+      checkoutPage.deleteProduct()
+    })
   })
 
 
