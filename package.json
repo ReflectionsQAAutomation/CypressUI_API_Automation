@@ -12,12 +12,12 @@
     "merge:reports": "jrm ./cypress/results/junit/report.xml \"cypress/results/junit/test-results*.xml\" ",
     "uploadReport": "node ./cypress/utils/uploadReport.js",
     "posttest": "merge:reports",
-    "UI:E2E:test:merge:upload": "npm run pretest && cross-env UPLOAD_REPORT_CONFIG=e2e.ui npm-run-all UI:E2E:test ",
+    "UI:E2E:test:merge:upload": "npm run pretest && npm-run-all jenkins:demo --continue-on-error merge:reports merge:json:report generate:html:report",
     "API:test:merge:upload": "npm run pretest && cross-env UPLOAD_REPORT_CONFIG=component.api npm-run-all API:Component:test --continue-on-error merge:reports uploadReport",
     "cy:demo": "cypress open --config-file demo.config.js",
     "cy:stage": "cypress open --config-file stage.config.js",
-    "jenkins:demo": "npx cypress run --spec cypress/e2e/UI/* --config-file demo.config.js",
-    "jenkins:stage": "npx cypress run --spec cypress/e2e/UI/* --config-file stage.config.js"
+    "jenkins:demo": "cypress run --spec cypress/e2e/*/* --config-file demo.config.js",
+    "jenkins:stage": "cypress run --spec cypress/e2e/*/* --config-file stage.config.js"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,19 @@
 /// <reference types="Cypress" />
+/*
+  This test case orchestrates the delete of a product in cart through a series of API requests.
+  1) Creating cart
+    - Initiates the process by creating a new cart in the system. This step simulates the user starting a shopping session.
+  2) Retrieves product list  and Adding product to the cart
+    - Fetches the list of products available for purchase from the system. Selects a product from the retrieved list and adds it to the previously created cart
+  3) Delete an item in cart  And  Retrives cart details and check if the products deleted are  not present in the cart
+   - This step mirrors the action of a user removing an item during an online shopping experience.
+*/
 
+beforeEach(() => {
+    cy.fixture("/api/cart/index.json").then(function (data) {
+      this.data = data;
+    });
+  });     
 
 describe('cart tests -delete', () => {
     let cart_id = '';
@@ -10,18 +24,18 @@ describe('cart tests -delete', () => {
     var productId = '';
 
     it("create a new cart", function () {
-        cy.postApiCall('/carts').as("cartIdResponse");
+        cy.postApiCall(this.data.post_createCart.url).as("cartIdResponse");
         cy.get("@cartIdResponse").should((response) => {
-            expect(response.status).to.eq(201);
+            expect(response.status).to.eq(this.data.post_createCart.response);
             const { body } = response;
             cart_id = body.id;
         });
     });
 
     it("Retrieves a product", function () {
-        cy.getApiCall('/products?between=10').as("productListResponse");
+        cy.getApiCall(this.data.get_productList.url).as("productListResponse");
         cy.get("@productListResponse").then((response) => {
-            expect(response.status).to.eq(200);
+            expect(response.status).to.eq(this.data.get_productList.response);
             const { body } = response;
             for (var iteration = 0; iteration <= 3; iteration++) {
                 productList.push(body.data[iteration].id)

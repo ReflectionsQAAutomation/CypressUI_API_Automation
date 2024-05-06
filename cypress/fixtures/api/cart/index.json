@@ -1,6 +1,24 @@
 {
-	  "post_Data": {
+	
+    "post_createCart":{
+        "url":"/carts",
+        "response": 201
+    },
+	"get_cartDeatils":{
+        "url": "/carts/",
+        "response": 200
+    },
+    "get_productList":{
+        "url": "/products?between=10",
+        "response": 200
+    },
+	"post_cartAddProduct": {
+	  "url": "/carts/",
+	  "response": 200,
+	  "body":
+	  {
 	  "product_id": "product_id_1",
 	  "quantity": 1
+	  }
 	}
 }
