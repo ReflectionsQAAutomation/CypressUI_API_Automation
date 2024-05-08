@@ -1,6 +1,6 @@
 
 trigger:
-- master
+- main
 
 pool:
   vmImage: windows-latest
@@ -27,4 +27,12 @@ steps:
     testResultsFormat: 'Junit'
     testRunTitle: 'UI E2E results'
     testResultsFiles: '**/cypress/results/junit/report.xml'
+  condition: succeededOrFailed()
+
+  
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/**/results/json/output.json'
+    artifact: 'UI Test Report'
+    publishLocation: 'pipeline'
   condition: succeededOrFailed()

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "UI:E2E:test": "cypress run --spec cypress/e2e/**/*.cy.js --config-file demo.config.js --record --key 13b89e1a-0c85-4a6a-8392-ad72183afd56",
+    "UI:E2E:test": "cypress run --spec cypress/e2e/UI/*.cy.js --config-file demo.config.js --record --key 13b89e1a-0c85-4a6a-8392-ad72183afd56",
     "API:E2E:test": "cypress run  --spec 'cypress/e2e/API/*.cy.js' --browser chrome --record --key 13b89e1a-0c85-4a6a-8392-ad72183afd56",
     "clean:reports": "(if exist cypress\\results (rmdir /Q /S cypress\\results)) && mkdir cypress\\results && mkdir cypress\\results\\json  &&  mkdir cypress\\results\\junit",
     "pretest": "npm run clean:reports",
