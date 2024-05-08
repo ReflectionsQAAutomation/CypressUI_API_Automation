@@ -41,8 +41,9 @@ steps:
     npm run API:test:merge:upload
     displayName: "API E2E Tests"
     continueOnError: true
+  condition: succeededOrFailed()
 
-- task: PublishTestResults@2
+- task: PublishTestResults@1
   inputs:
     testResultsFormat: 'Junit'
     testRunTitle: 'API E2E results'
