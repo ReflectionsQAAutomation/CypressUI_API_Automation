@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "UI:E2E:test": "cypress run --spec cypress/e2e/UI/*.cy.js --config-file demo.config.js",
+    "UI:E2E:test": "cypress run --spec cypress/e2e/UI/*.cy.js --config-file demo.config.js --browser chrome ",
     "API:E2E:test": "cypress run  --spec 'cypress/e2e/API/*.cy.js'  --record --key 13b89e1a-0c85-4a6a-8392-ad72183afd56",
     "clean:reports": "(if exist cypress\\results (rmdir /Q /S cypress\\results)) && mkdir cypress\\results && mkdir cypress\\results\\json  &&  mkdir cypress\\results\\junit",
     "pretest": "npm run clean:reports",
@@ -13,7 +13,7 @@
     "uploadReport": "node ./cypress/utils/uploadReport.js",
     "posttest": "npm-run-all --continue-on-error merge:reports merge:json:report generate:html:report",
     "UI:E2E:test:merge:upload": "npm run pretest && npm run UI:E2E:test && npm run posttest",
-    "API:test:merge:upload": "npm run pretest && npm-run-all API:E2E:test --continue-on-error merge:reports merge:json:report generate:html:report",
+    "API:test:merge:upload": "npm run pretest && npm-run-all API:E2E:test && npm run posttest",
     "cy:demo": "cypress open --config-file demo.config.js",
     "cy:stage": "cypress open --config-file stage.config.js",
     "jenkins:demo": "cypress run --spec cypress/e2e/**/*.cy.js --config-file demo.config.js",
