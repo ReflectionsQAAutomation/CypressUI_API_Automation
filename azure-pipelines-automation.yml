@@ -26,7 +26,7 @@ steps:
     displayName: "Install dependencies"
 
 - script: |
-    npm run jenkins:demo --browser $(chrome)
+    npm run pretest && npm run UI:E2E:test --browser $(chrome) && npm run posttest 
     displayName: "UI E2E Tests"
     continueOnError: true
 
