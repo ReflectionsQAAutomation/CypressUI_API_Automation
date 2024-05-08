@@ -1,5 +1,14 @@
 trigger:
 - main
+parameters:
+  - name: browser
+    displayName: Browser Choice
+    type: string
+    default: edge
+    values:
+      - chrome
+      - edge
+      - firefox
 
 pool:
   vmImage: windows-latest
@@ -17,7 +26,7 @@ steps:
     displayName: "Install dependencies"
 
 - script: |
-    npm run UI:E2E:test:merge:upload
+    npm run jenkins:demo --browser $(chrome)
     displayName: "UI E2E Tests"
     continueOnError: true
 
