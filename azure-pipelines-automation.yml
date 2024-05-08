@@ -25,6 +25,6 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'Junit'
-    testRunTitle: 'UI E2E results --browser chrome --config-file demo.config.js'
+    testRunTitle: 'UI E2E results'
     testResultsFiles: '**/cypress/results/junit/report.xml'
   condition: succeededOrFailed()
