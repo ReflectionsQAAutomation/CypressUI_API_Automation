@@ -19,12 +19,24 @@ steps:
 
 - script: |
     npm run UI:E2E:test:merge:upload
-    displayName: "Tests"
+    displayName: "UI E2E Tests"
     continueOnError: true
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'Junit'
-    testRunTitle: 'API test log'
+    testRunTitle: 'UI E2E results --browser chrome --config-file demo.config.js'
+    testResultsFiles: '**/cypress/results/junit/report.xml'
+  condition: succeededOrFailed()
+
+  - script: |
+    npm run UI:E2E:test:merge:upload
+    displayName: "UI E2E Tests"
+    continueOnError: true
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'Junit'
+    testRunTitle: 'UI E2E results'
     testResultsFiles: '**/cypress/results/junit/report.xml'
   condition: succeededOrFailed()
