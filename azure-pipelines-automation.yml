@@ -27,7 +27,7 @@ steps:
   displayName: "Install dependencies"
 
 - script: |
-    npm run pretest && npm-run-all UI:E2E:test --browser $(browser) --continue-on-error merge:reports merge:json:report generate:html:report
+    npm run pretest && npm run UI:E2E:test --browser $(browser) --continue-on-error merge:reports merge:json:report generate:html:report
   displayName: "UI E2E Tests"
   continueOnError: true
 
