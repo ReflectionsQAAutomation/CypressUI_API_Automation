@@ -1,6 +1,14 @@
-
 trigger:
-- master
+- main
+parameters:
+  - name: browser
+    displayName: Browser Choice
+    type: string
+    default: edge
+    values:
+      - chrome
+      - edge
+      - firefox
 
 pool:
   vmImage: windows-latest
@@ -18,13 +26,41 @@ steps:
     displayName: "Install dependencies"
 
 - script: |
-    npm run UI:E2E:test:merge:upload
-    displayName: "Tests"
+    npm run jenkins:demo --browser $(chrome)
+    displayName: "UI E2E Tests"
     continueOnError: true
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'Junit'
-    testRunTitle: 'API test log'
+    testRunTitle: 'UI E2E results'
     testResultsFiles: '**/cypress/results/junit/report.xml'
+  condition: succeededOrFailed()
+
+  
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/s/cypress/results/html-report'
+    artifact: 'UI Test Report'
+    publishLocation: 'pipeline'
+  condition: succeededOrFailed()
+
+- script: |
+    npm run API:test:merge:upload
+    displayName: "API E2E Tests"
+    continueOnError: true
+  condition: succeededOrFailed()
+
+- task: PublishTestResults@1
+  inputs:
+    testRunTitle: 'API E2E results'
+    testResultsFiles: '**/cypress/results/junit/report.xml'
+  condition: succeededOrFailed()
+
+  
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/s/cypress/results/html-report'
+    artifact: 'API Test Report'
+    publishLocation: 'pipeline'
   condition: succeededOrFailed()
