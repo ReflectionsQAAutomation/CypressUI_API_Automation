@@ -36,3 +36,23 @@ steps:
     artifact: 'UI Test Report'
     publishLocation: 'pipeline'
   condition: succeededOrFailed()
+
+  - script: |
+    npm run API:test:merge:upload
+    displayName: "API E2E Tests"
+    continueOnError: true
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'Junit'
+    testRunTitle: 'API E2E results'
+    testResultsFiles: '**/cypress/results/junit/report.xml'
+  condition: succeededOrFailed()
+
+  
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/s/cypress/results/html-report'
+    artifact: 'API Test Report'
+    publishLocation: 'pipeline'
+  condition: succeededOrFailed()
