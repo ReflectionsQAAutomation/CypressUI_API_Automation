@@ -37,7 +37,7 @@ steps:
     publishLocation: 'pipeline'
   condition: succeededOrFailed()
 
-  - script: |
+- script: |
     npm run API:test:merge:upload
     displayName: "API E2E Tests"
     continueOnError: true
