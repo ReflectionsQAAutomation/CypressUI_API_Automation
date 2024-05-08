@@ -7,6 +7,7 @@ class HomePage {
         addToCartButton: ' [ data-test=add-to-cart]',
         cartButton: '[ data-test=nav-cart]',
         homeButton: '[ data-test=nav-home]',
+        filterButton: '[ data-test=filters]'
     }
 
     searchProduct(product) {
@@ -25,6 +26,10 @@ class HomePage {
 
     goToHomePage(){
         cy.clickElement(this.elements.homeButton)
+    }
+
+    clickOnFilter(){
+        cy.clickElement(this.elements.filterButton)
     }
 
    

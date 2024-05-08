@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 import HomePage from '../../support/pages/HomePage';
 import CheckoutPage from '../../support/pages/CheckoutPage';
+import purchaseItem from '../../fixtures/purchaseItems.json';
+import logindata from '../../fixtures/loginCredentials.json';
 
 const csv = require('neat-csv')
 
@@ -8,8 +10,6 @@ const homePage = new HomePage();
 const checkoutPage = new CheckoutPage();
 
 let regData;
-let testdata;
-
 
 describe('product purchase', () => {
   before(() => {
@@ -18,26 +18,21 @@ describe('product purchase', () => {
       .then((data) => {
         regData = data
       })
-
-    cy.fixture('testdata').then((data1) =>{
-      testdata = data1
-    })
   })
 
   beforeEach(() => {
     cy.visit('/')
-    cy.login(testdata.username, testdata.password)
+    cy.login(logindata.username, logindata.password)
     cy.intercept('POST', `${Cypress.env('apiUrl')}/users/login`).as('login')
-    cy.wait('@login')    
+    cy.wait('@login')
     cy.intercept('GET', `${Cypress.env('apiUrl')}/products/search?*`).as('search')
   })
-
 
   it('Product Puchase - Happy Path', () => {
     for (let i = 0; i < regData.length; i++) {
       homePage.goToHomePage()
       homePage.searchProduct(regData[i]['Products'])
-      cy.wait('@search')      
+      cy.wait('@search')
       homePage.addItemToCart()
       checkoutPage.checkoutCart(regData[i]['Payment Method'])
       homePage.goToHomePage()
@@ -45,19 +40,16 @@ describe('product purchase', () => {
   })
 
   it('Delete Product from Cart', () => {
-    cy.fixture('purchaseItems').then((purchaseItems) => {
-      homePage.goToHomePage()
-      homePage.searchProduct(purchaseItems.item1)
-      cy.wait('@search')
-      homePage.addItemToCart()
-      homePage.goToHomePage()
-      homePage.searchProduct(purchaseItems.item2)
-      cy.wait('@search')
-      homePage.addItemToCart()
-      homePage.goToCart()
-      checkoutPage.deleteProduct()
-    })
+    homePage.goToHomePage()
+    homePage.searchProduct(purchaseItem.item1)
+    cy.wait('@search')
+    homePage.addItemToCart()
+    homePage.goToHomePage()
+    homePage.searchProduct(purchaseItem.item2)
+    cy.wait('@search')
+    homePage.addItemToCart()
+    homePage.goToCart()
+    checkoutPage.deleteProduct()
   })
-
 
 })
