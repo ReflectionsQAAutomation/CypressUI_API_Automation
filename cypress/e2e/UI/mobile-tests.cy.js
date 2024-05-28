@@ -1,4 +1,10 @@
 /// <reference types="cypress" />
+
+/*
+  This Tests perform mobile testing and accesibilty testing 
+  i.e., it views the application in different mobile screens and checks if it is accessible for different screens.
+*/
+
 import HomePage from '../../support/pages/HomePage';
 import mobiledevicedata from '../../fixtures/mobiledevices.json';
 import purchaseItem from '../../fixtures/purchaseItems.json';

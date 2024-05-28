@@ -1,4 +1,10 @@
 /// <reference types="cypress" />
+/*
+  1. 1st Testcase performs Happy Path for ecommerce site which involes below steps
+  Signin -> go to HomePage -> search for a product ->  add it to cart ->  checkout
+  2. 2nd Testcases perfoms deletion of product added to cart.
+*/
+
 import HomePage from '../../support/pages/HomePage';
 import CheckoutPage from '../../support/pages/CheckoutPage';
 import purchaseItem from '../../fixtures/purchaseItems.json';

@@ -1,3 +1,5 @@
+//Resusable method for performing 'LOGIN' on the UI
+
 import LoginPage from '../../support/pages/LoginPage.js'
 
 const loginPage = new LoginPage()

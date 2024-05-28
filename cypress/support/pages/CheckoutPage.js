@@ -1,3 +1,5 @@
+//This Class contains elements and functions performed related to Checkout page of the UI
+
 import HomePage from '../../support/pages/HomePage';
 const homePage = new HomePage();
 

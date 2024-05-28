@@ -1,3 +1,5 @@
+//This is the config for DEMO environment. i.e., all the url and properties related to DEMO are placed here.
+
 const { defineConfig } = require("cypress");
 const { downloadFile } = require("cypress-downloadfile/lib/addPlugin");
 module.exports = defineConfig({

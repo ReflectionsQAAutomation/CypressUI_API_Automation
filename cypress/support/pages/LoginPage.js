@@ -1,3 +1,5 @@
+//This Class contains elements related to Login page
+
 class LoginPage {
 
     elements = {

@@ -1,3 +1,5 @@
+//This Class contains elements and functions performed related to HomePage of the UI
+
 class HomePage {
 
     elements = {
