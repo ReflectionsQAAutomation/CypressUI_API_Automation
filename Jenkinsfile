@@ -8,7 +8,7 @@ pipeline{
     }
 
     options{
-        ansiColor('xterm')
+        ansiColor('catchError')
     }
 
     stages{
