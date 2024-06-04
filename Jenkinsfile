@@ -6,11 +6,6 @@ pipeline{
         choice(name: 'SCRIPT', choices : ['jenkins:demo', 'jenkins:stage'], description : "Enter the script path that you want to run")
         choice(name: 'BROWSER', choices : ['chrome', 'edge', 'firefox'] , description : "Browser choice that you want to run")
     }
-
-    options{
-        ansiColor('catchError')
-    }
-
     stages{
         stage('Building'){
             steps{
