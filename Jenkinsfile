@@ -25,10 +25,11 @@ pipeline{
         }
     }
 
-    post{
-        always{
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
-           //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'cypress/report/*.html', reportFiles: 'mochawesome-report', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+     post {
+        always {
+            echo("Generating allure report")
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+           // emailext body: '''${SCRIPT, template="allure-report.groovy"}''', compressLog: true, replyTo: 'gariki.pavani@reflectionsinfos.com', subject: "Jenkins Test Execution Summary '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", to: 'gariki.pavani@reflectionsinfos.com'
         }
     }
 
