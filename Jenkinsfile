@@ -27,10 +27,21 @@ pipeline{
 
      post {
         always {
-            echo("Generating allure report")
-            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-           // emailext body: '''${SCRIPT, template="allure-report.groovy"}''', compressLog: true, replyTo: 'gariki.pavani@reflectionsinfos.com', subject: "Jenkins Test Execution Summary '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", to: 'gariki.pavani@reflectionsinfos.com'
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'cypress/results/json',
+                reportFiles: 'mochawesome-report.html',
+                reportName: 'HTML Report'
+            ])
         }
+    }
+        // always {
+        //     echo("Generating allure report")
+        //     allure includeProperties: false, jdk: '', results: [[path: './allure-results']]
+        //    // emailext body: '''${SCRIPT, template="allure-report.groovy"}''', compressLog: true, replyTo: 'gariki.pavani@reflectionsinfos.com', subject: "Jenkins Test Execution Summary '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", to: 'gariki.pavani@reflectionsinfos.com'
+        // }
     }
 
 }

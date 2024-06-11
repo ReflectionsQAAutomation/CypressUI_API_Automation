@@ -17,7 +17,7 @@
     "cy:demo": "cypress open --config-file demo.config.js",
     "cy:stage": "cypress open --config-file stage.config.js",
     "jenkins:demo": "cypress run --spec cypress/e2e/**/*.cy.js --config-file demo.config.js",
-    "jenkins:stage": "cypress run --spec cypress/e2e/*/* --config-file stage.config.js"
+    "jenkins:stage": "cypress run --spec cypress/e2e/**/*.cy.js --config-file stage.config.js"
   },
   "keywords": [],
   "author": "",
@@ -44,6 +44,7 @@
     "pngjs": "^7.0.0",
     "rimraf": "^4.4.0"
   },
+
   "devDependencies": {
     "cypress": "^13.7.3",
     "cypress-failed-log": "^2.10.0"
