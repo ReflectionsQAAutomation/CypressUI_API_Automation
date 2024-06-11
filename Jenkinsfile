@@ -39,7 +39,7 @@ pipeline{
     
      stage('Merge HTML Reports') {
             steps {
-               npx mochawesome-merge ./cypress/results/json/mochawesome*.json > ./cypress/results/json/output.json
+              mergejsonreport: 'npx mochawesome-merge ./cypress/results/json/mochawesome*.json > ./cypress/results/json/output.json',
             }
         }
     }
