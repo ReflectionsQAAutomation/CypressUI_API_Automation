@@ -24,7 +24,7 @@ pipeline{
             }
         }
     }
-
+    
      post {
         always {
             publishHTML(target: [
@@ -36,13 +36,14 @@ pipeline{
                 reportName: 'HTML Report'
             ])
         }
-    }
+    
      stage('Merge HTML Reports') {
             steps {
                npx mochawesome-merge ./cypress/results/json/mochawesome*.json > ./cypress/results/json/output.json
             }
         }
     }
+}
         // always {
         //     echo("Generating allure report")
         //     allure includeProperties: false, jdk: '', results: [[path: './allure-results']]
